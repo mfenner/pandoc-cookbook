@@ -13,8 +13,9 @@ remote_file "#{Chef::Config[:file_cache_path]}/#{node[:pandoc][:filename]}" do
 end
 
 bash "install_pandoc_binary" do
+  user "vagrant"
   cwd Chef::Config[:file_cache_path]
-  code <<-EOH
+  command <<-EOH
     export PATH="$HOME/pandoc:$PATH"
     mkdir $HOME/pandoc
     unzip -j #{node[:pandoc][:filename]}" pandoc-#{node[:pandoc][:version]}"/linux/debian/x86_64/pandoc -d $HOME/pandoc
