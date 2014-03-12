@@ -6,6 +6,7 @@
 end
 
 # Install Pandoc binary
+
 remote_file "#{Chef::Config[:file_cache_path]}/#{node[:pandoc][:filename]}" do
   source "#{node[:pandoc][:remote_path]}"
   action :create_if_missing
@@ -19,6 +20,4 @@ bash "install_pandoc_binary" do
     unzip -j #{node[:pandoc][:filename]}" pandoc-#{node[:pandoc][:version]}"/linux/debian/x86_64/pandoc -d $HOME/pandoc
     chmod +x $HOME/pandoc/pandoc
   EOH
-  creates "/vagrant/home/pandoc/pandoc"
-  action :create_if_missing
 end
