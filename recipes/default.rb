@@ -16,9 +16,10 @@ bash "install_pandoc_binary" do
   user "vagrant"
   cwd Chef::Config[:file_cache_path]
   code <<-EOH
-    export PATH="$HOME/pandoc:$PATH"
-    mkdir $HOME/pandoc
-    unzip -j #{node[:pandoc][:filename]}" pandoc-#{node[:pandoc][:version]}"/linux/debian/x86_64/pandoc -d $HOME/pandoc
-    chmod +x $HOME/pandoc/pandoc
+    export PATH="/vagrant/pandoc:$PATH"
+    mkdir /vagrant/pandoc
+    unzip -j #{node[:pandoc][:filename]}" pandoc-#{node[:pandoc][:version]}"/linux/debian/x86_64/pandoc -d /vagrant/pandoc
+    chmod +x /vagrant/pandoc/pandoc
   EOH
+  creates "$HOME/pandoc/pandoc"
 end
