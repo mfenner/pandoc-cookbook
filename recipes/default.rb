@@ -1,25 +1,15 @@
-# Install required packages
-%w{curl unzip}.each do |pkg|
-  package pkg do
-    action :install
-  end
+include_recipe 'cabal'
+
+# Install Haskell Platform
+package "haskell platform" do
+  action :install
 end
 
-# Install Pandoc binary
+# Update Cabal
+cabal_update
 
-remote_file "#{Chef::Config[:file_cache_path]}/#{node[:pandoc][:filename]}" do
-  source "#{node[:pandoc][:remote_path]}"
-  action :create_if_missing
-end
-
-bash "install_pandoc_binary" do
-  user "vagrant"
-  cwd Chef::Config[:file_cache_path]
-  code <<-EOH
-    export PATH="/vagrant/pandoc:$PATH"
-    mkdir /vagrant/pandoc
-    unzip -j #{node[:pandoc][:filename]}" pandoc-#{node[:pandoc][:version]}"/linux/debian/x86_64/pandoc -d /vagrant/pandoc
-    chmod +x /vagrant/pandoc/pandoc
-  EOH
-  creates "$HOME/pandoc/pandoc"
+# Install Pandoc
+%w{pandoc pandoc-citeproc}.each do |pkg|
+cabal_install pkg do
+  user 'vagrant'
 end

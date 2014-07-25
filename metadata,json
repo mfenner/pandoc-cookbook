@@ -9,8 +9,9 @@
   },
   "dependencies": {
     "apt": ">= 0.0.0",
+    "cabal": ">= 0.0.0",
     "build-essential": ">= 0.0.0",
     "git": ">= 0.0.0",
   },
-  "version": "0.1.0"
+  "version": "0.2.0"
 }
