@@ -10,6 +10,7 @@ cabal_update
 
 # Install Pandoc
 %w{pandoc pandoc-citeproc}.each do |pkg|
-cabal_install pkg do
-  user 'vagrant'
+  cabal_install pkg do
+    user 'vagrant'
+  end
 end
