@@ -6,11 +6,14 @@ package "haskell-platform" do
 end
 
 # Update Cabal
-cabal_update 'vagrant'
+cabal_update node[:pandoc][:user]
 
 # Install Pandoc
-%w{pandoc pandoc-citeproc}.each do |pkg|
-  cabal_install pkg do
-    user 'vagrant'
-  end
+cabal_install "pandoc" do
+  user node[:pandoc][:user]
+end
+
+# Install Pandoc-Citeproc
+cabal_install "pandoc-citeproc" do
+  user node[:pandoc][:user]
 end
