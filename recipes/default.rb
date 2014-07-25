@@ -1,7 +1,9 @@
 include_recipe 'cabal'
 
 # Install required packages
-%w{haskell-platform texlive curl}.each do |pkg|
+# we install texlive for latex and pdf output
+# we install inkscape for svg output
+%w{haskell-platform texlive inkscape curl}.each do |pkg|
   package pkg do
     action :install
   end
