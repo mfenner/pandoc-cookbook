@@ -6,7 +6,7 @@ package "haskell platform" do
 end
 
 # Update Cabal
-cabal_update
+cabal_update 'vagrant'
 
 # Install Pandoc
 %w{pandoc pandoc-citeproc}.each do |pkg|
