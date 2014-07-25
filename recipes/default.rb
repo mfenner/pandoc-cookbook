@@ -1,7 +1,7 @@
 include_recipe 'cabal'
 
 # Install Haskell Platform
-package "haskell platform" do
+package "haskell-platform" do
   action :install
 end
 
