@@ -13,5 +13,5 @@
     "build-essential": ">= 0.0.0",
     "git": ">= 0.0.0",
   },
-  "version": "0.2.3"
+  "version": "0.2.4"
 }

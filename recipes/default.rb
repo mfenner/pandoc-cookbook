@@ -1,19 +1,30 @@
 include_recipe 'cabal'
 
-# Install Haskell Platform
-package "haskell-platform" do
-  action :install
+# Install required packages
+%w{haskell-platform texlive curl}.each do |pkg|
+  package pkg do
+    action :install
+  end
 end
 
-# Update Cabal
+# Add binaries installed by cabal to PATH
+file '/etc/profile.d/cabal.sh' do
+  content "export PATH=$PATH:~/.cabal/bin"
+end
+
+bash "source profile" do
+  command "source .profile"
+end
+
+# Update cabal
 cabal_update node[:pandoc][:user]
 
-# Install Pandoc
-cabal_install "pandoc" do
+# Install pandoc
+cabal_install "pandoc-#{node[:pandoc][:version]}" do
   user node[:pandoc][:user]
 end
 
-# Install Pandoc-Citeproc
-cabal_install "pandoc-citeproc" do
+# Install pandoc-citeproc
+cabal_install "pandoc-citeproc-#{node[:citeproc][:version]}" do
   user node[:pandoc][:user]
 end
